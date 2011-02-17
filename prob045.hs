@@ -15,4 +15,4 @@ answer            = [ n | n <- triangles, isPentagonal n, isHexagonal n] !! 2
                           isPentagonal = flip Set.member $ Set.fromList pentagonals
 
 
-main   = do print answer
+main   = print answer
