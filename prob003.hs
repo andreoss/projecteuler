@@ -3,7 +3,7 @@ isPrime n
   | n == 1     = False
   | n == 2     = True
   | even n    = False
-  | otherwise = null $ filter (\ x -> rem n x == 0) [3 .. l]
+  | otherwise = (not . any (\ x -> rem n x == 0)) [3 .. l]
   		where l = round $ sqrt $ fromIntegral n
 
 nthPrime :: Integral a => Int -> a
@@ -21,4 +21,4 @@ factors' n primeN acc
 factors n = factors' n 0 []
 
 answer = maximum $ factors 600851475143 
-main   = do print answer
+main   = print answer
