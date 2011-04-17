@@ -2,7 +2,7 @@
 import qualified Data.Set as Set
 
 digits :: Int -> [Int]
-digits = (map negate) . (map (((-) (fromEnum '0') ) . fromEnum)) . show 
+digits = map (negate . (-) (fromEnum '0')  . fromEnum) . show 
 
 isPermute a b = Set.fromList ad == Set.fromList bd
                 where
@@ -14,7 +14,7 @@ isPrime n
   | n == 1     = False
   | n == 2     = True
   | even n    = False
-  | otherwise = null $ filter (\ x -> rem n x == 0) [3 .. l]
+  | otherwise = not $ any (\ x -> rem n x == 0) [3 .. l]
   		where l = round $ sqrt $ fromIntegral n
 
 combinations :: Int -> [a] -> [[a]]
@@ -29,8 +29,8 @@ isGood n = filter (\[a,b,c] -> a == n && b == a + 3330 && c == b + 3330 ) $ comb
 
 result   = map head $ filter (not . null) $ map isGood primes
 
-answer   = foldr (++) "" $ map show $ result !! 1
+answer   = foldr ((++) . show) "" $ result !! 1
 
-main     = do print answer
+main     = putStrLn answer
 
 
