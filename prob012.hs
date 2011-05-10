@@ -30,7 +30,7 @@ primeDivs n = [p | p <- (takeWhile (< n) primes), n `mod` p == 0]
 eulerTotient n = round $ (fromIntegral n) * (product $ map (\p -> (p^2 -1)/(p-1)) $ map fromIntegral $ primeDivs n) 
 
 
-divs n = [ d |  d <- [1..(n-1)], n `mod` d == 0  ]
+divs n = [ d |  d <- [2..(n-1)], n `mod` d == 0  ]
 sumDivs' = sum . divs
 
 
@@ -41,16 +41,20 @@ factorize' ps n
     where  p  = head ps
 
 factorize     = factorize' primes
-
+factorizeP    :: Integer -> [(Int,Int)]
 factorizeP    = map (\a -> (head a, length a)) . group . map fromIntegral . factorize
+factors'  :: [Int] -> [Int]
+factors' []     = []
+factors' (p:pt) = [p] ++ (map (* p) pt) ++ (factors' pt)
+
+factors n = factors' (map (\(a,b) -> a ^ b) $ factorizeP n)
+allProducts     [] = []
+allProducts (f:fs) = (map (* f) fs) ++ allProducts fs
 
 
 triangular n  = round $ (n / 2) * (n + 1)
-
 numberFactors = product . map (+1) . map snd . factorizeP
-
 triangulars   = map triangular [1..]
-
 answer        = head [ t | t <- triangulars, numberFactors t > 500]
 
 main          = do print answer
