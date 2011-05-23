@@ -1,0 +1,31 @@
+use v5;
+use Modern::Perl;
+use Math::Prime::XS qw(is_prime);
+
+
+sub spiral_ratio {
+    my $size = shift;
+    state $round = 1;
+    state $i     = 1;
+
+    state @spiral;
+    state @primes;
+
+    while ( $i <= $size**2 ) {
+        push @spiral, $i;
+        push @primes, $i if is_prime($i);
+        if ( $i + $round + 1 > ( $round + 2 )**2 ) {
+            $round += 2;
+        }
+        $i += 1 + $round;
+    }
+
+    ~~ @primes / ~~ @spiral;
+}
+
+for my $i ( 2 .. 2 << 32 ) {
+    my $ratio = spiral_ratio $i;
+    say $i and last
+      if $ratio < 0.1;
+}
+
