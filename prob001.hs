@@ -1,9 +1,15 @@
+module Problem_1
+where
+
 sumDivisibleBy target n = let p = target `div` n in
   n * p * (p + 1) `div` 2
 
-sumT = sumDivisibleBy 999
+sum' = sumDivisibleBy 999
 
-answer = (sumT 3) + (sumT 5) - (sumT 15)
 
-main   = do print answer
 
+main :: IO ()
+main = print answer
+   where
+     answer :: Int
+     answer = (sum' 3) + (sum' 5) - (sum' 15)
