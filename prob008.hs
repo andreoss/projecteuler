@@ -26,9 +26,9 @@ digits = map digitToInt $
 slice start end = take amount . drop start where amount = end - start + 1
 slice13 x = slice x (x+12)
 
-all13 = map (flip slice13 digits) [0..(length digits)-13-1]
+all13 = map (`slice13` digits) [0.. length digits - 13 - 1]
 
 products = map product all13
 
 answer   = maximum products 
-main     = do print answer
+main     = print answer
