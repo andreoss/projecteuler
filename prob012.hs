@@ -49,12 +49,12 @@ factors' (p:pt) = [p] ++ (map (* p) pt) ++ (factors' pt)
 
 factors n = factors' (map (\(a,b) -> a ^ b) $ factorizeP n)
 allProducts     [] = []
-allProducts (f:fs) = (map (* f) fs) ++ allProducts fs
+allProducts (f:fs) = map (* f) fs ++ allProducts fs
 
 
 triangular n  = round $ (n / 2) * (n + 1)
-numberFactors = product . map (+1) . map snd . factorizeP
+numberFactors = product . map ((+1) . snd) . factorizeP
 triangulars   = map triangular [1..]
 answer        = head [ t | t <- triangulars, numberFactors t > 500]
 
-main          = do print answer
+main          = print answer
