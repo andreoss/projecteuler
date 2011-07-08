@@ -14,6 +14,6 @@ amicable a = let b  = sumOfDivs a
 
 
 answer = sum $ filter amicable [1..10000]
-main   = do print answer
+main   = print answer
 
 
