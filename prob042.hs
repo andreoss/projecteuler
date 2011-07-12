@@ -8,12 +8,12 @@ loadWords = do
 triagleNum n = (n * (n + 1)) `div` 2
 
 wordValue [] = 0
-wordValue (x:xs) = (ch x) + wordValue xs
+wordValue (x:xs) = ch x + wordValue xs
                    where
-                     ch c = (fromEnum c) - (fromEnum 'A') + 1
+                     ch c = fromEnum c - fromEnum 'A' + 1
 
 triagles = triagles' 1
-  where triagles' x = (triagleNum x) : (triagles' (x+1))
+  where triagles' x = triagleNum x : triagles' (x+1)
 
 triaglesTo n = takeWhile (<= n) triagles
 isTriangle :: Int -> Bool
