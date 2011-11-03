@@ -1,0 +1,1 @@
+# Various Project Euler solutions in Haskell
